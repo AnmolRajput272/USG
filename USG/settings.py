@@ -42,7 +42,8 @@ INSTALLED_APPS = [
 EXTERNAL_APPS = [
     'accounts',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'vendors'
 ]
 
 INSTALLED_APPS = INSTALLED_APPS + EXTERNAL_APPS
