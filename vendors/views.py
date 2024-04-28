@@ -4,27 +4,6 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
-
-# class ListVendors(APIView):
-#     permission_classes = []
-#     authentication_classes = []
-
-#     def get(self, request):
-#         vendors = Vendor.objects.all()
-#         vendors = VendorSerializer(vendors, many=True).data
-#         return Response(vendors)
-    
-# class AddVendor(APIView):
-#     permission_classes = []
-#     authentication_classes = []
-
-#     def post(self, request):
-#         data = request.data
-#         serializer = AddVendorSerializer(data=data)
-#         if not serializer.is_valid():
-#             return Response({"message":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
-#         vendor = serializer.save()
-#         return Response(vendor)
     
 class VendorModelView(ModelViewSet):
     permission_classes = []
