@@ -1,11 +1,13 @@
 from django.db import models
 import uuid
+from django.contrib.auth.models import User
 
 class Vendor(models.Model):
     vendor_code = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     contact_details = models.TextField()
     address = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="vendors", null=True)
 
 class HistoricalPerformance(models.Model):
     vendor = models.OneToOneField(Vendor, on_delete=models.CASCADE, related_name="historical_performance", unique=True)

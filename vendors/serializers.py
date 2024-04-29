@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import *
 from rest_framework.response import Response
+from accounts.serializers import UserSerializer
 
 class HistoricalPerformanceModelSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,10 +10,11 @@ class HistoricalPerformanceModelSerializer(serializers.ModelSerializer):
 
 class VendorSerializer(serializers.ModelSerializer):
     historical_performance = HistoricalPerformanceModelSerializer(read_only=True)
-    
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Vendor
-        fields = ['vendor_code', 'name', 'contact_details', 'address', 'historical_performance']
+        fields = ['vendor_code', 'name', 'contact_details', 'address', 'historical_performance', 'user']
 
 
 class PurchaseOrderModelSerializer(serializers.ModelSerializer):

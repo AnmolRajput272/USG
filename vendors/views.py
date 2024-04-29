@@ -4,17 +4,31 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework import status
 from rest_framework.exceptions import ValidationError
+from django.contrib.auth.models import User
     
 class VendorModelView(ModelViewSet):
     permission_classes = []
     authentication_classes = []
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
-    
-    def perform_create(self, serializer):
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        if "user_id" not in data:
+            raise ValidationError({"error":"User_id should be passed."})
+        serializer = VendorSerializer(data=data)
+        if not serializer.is_valid():
+            return Response({"errors":serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        user = User.objects.get(id=data["user_id"])
+        serializer.validated_data["user"] = user
         vendor = serializer.save()
         HistoricalPerformance.objects.create(vendor=vendor)
-        return Response(serializer.validated_data)
+        return Response(serializer.data)
+            
+    # def perform_create(self, serializer):
+    #     vendor = serializer.save()
+    #     HistoricalPerformance.objects.create(vendor=vendor)
+    #     return Response(serializer.validated_data)
 
 class PurchaseOrderModelView(ModelViewSet):
     permission_classes = []
