@@ -22,13 +22,6 @@ class PurchaseOrderModelSerializer(serializers.ModelSerializer):
         model = PurchaseOrder
         fields = '__all__'
 
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     # Remove historical_performance from vendor data
-    #     if data['vendor'] and 'historical_performance' in data['vendor']:
-    #         del data['vendor']['historical_performance']
-    #     return data
-
 
 class PurchaseOrderUpdateSerializer(serializers.Serializer):
 
