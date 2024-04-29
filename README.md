@@ -15,24 +15,24 @@ This project is a Django-based backend system for managing vendors, purchase ord
 
 1. Clone the repository:
 
-  ```bash
+  ```shell
   git clone <repository_url>
 
 2. Install dependencies:
 
-  ```bash
+  ```shell
   pip install -r requirements.txt
 
 3. Apply database migrations:
 
-  ```bash
+  ```shell
   python manage.py makemigrations
   python manage.py migrate
 
 
 4. Start the development server:
 
-  ```bash
+  ```shell
   python manage.py runserver
 
 ## Usage
