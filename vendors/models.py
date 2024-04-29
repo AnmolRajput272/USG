@@ -26,21 +26,21 @@ class PurchaseOrder(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name="purchase_orders", null=True)
     order_date = models.DateTimeField()
     expected_delivery_date = models.DateTimeField()
-    delivery_date = models.DateTimeField()
+    delivery_date = models.DateTimeField(null=True)
     items = models.JSONField()
     quantity = models.IntegerField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES)
     quality_rating = models.FloatField(null=True)
     issue_date = models.DateTimeField()
-    acknowledgment_date = models.DateTimeField(null=True)
+    acknowledgement_date = models.DateTimeField(null=True)
 
 
 class VendorStat(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name="vendor_stat")
-    no_of_deliveries_completed = models.IntegerField()
-    no_of_ratings_received = models.IntegerField()
-    no_of_acknowledgements_given = models.IntegerField()
-    no_of_pos_issued = models.IntegerField()
+    no_of_deliveries_completed = models.IntegerField(default=0)
+    no_of_ratings_received = models.IntegerField(default=0)
+    no_of_acknowledgements_given = models.IntegerField(default=0)
+    no_of_pos_issued = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return f"{self.vendor.name}"

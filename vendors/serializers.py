@@ -29,17 +29,18 @@ class PurchaseOrderModelSerializer(serializers.ModelSerializer):
     #         del data['vendor']['historical_performance']
     #     return data
 
-# class AddVendorSerializer(serializers.Serializer):
-#     name = serializers.CharField()
-#     contact_details = serializers.CharField()
-#     address = serializers.CharField()
 
-#     def create(self, validated_data):
-#         vendor = Vendor.objects.create(**validated_data)
-#         historical_performance = HistoricalPerformance.objects.create(vendor=vendor)
-#         vendor = VendorSerializer(vendor).data
-#         vendor["historical_data"] = HistoricalPerformanceModelSerializer(historical_performance).data
-#         return vendor
+class PurchaseOrderUpdateSerializer(serializers.Serializer):
 
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('canceled', 'Canceled')
+    ]
+
+    status = serializers.ChoiceField(allow_null=True, choices=STATUS_CHOICES)
+    quality_rating = serializers.FloatField(allow_null=True)
+    acknowledgement_date = serializers.DateTimeField(allow_null=True)
+    delivery_date = serializers.DateTimeField(allow_null=True)
 
 

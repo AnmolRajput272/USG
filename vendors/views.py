@@ -35,14 +35,18 @@ class PurchaseOrderModelView(ModelViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def update(self, request, *args, **kwargs):
-        vendor_id = request.data.get('vendor_code',None)
-        if vendor_id is None:
-            raise ValidationError("Vendor ID should be passed.")
+        partial = kwargs.pop('partial', False)
+        if not partial:
+            vendor_id = request.data.get('vendor_code',None)
+            if vendor_id is None:
+                raise ValidationError("Vendor ID should be passed.")
         purchase_order = PurchaseOrder.objects.get(po_number=kwargs.get('pk'))
-        serializer = self.get_serializer(purchase_order, data=request.data)
+        serializer = self.get_serializer(purchase_order, data=request.data, partial=partial)
         if serializer.is_valid():
-            vendor = Vendor.objects.get(vendor_code=vendor_id)
-            serializer.validated_data['vendor'] = vendor
+            if not partial:
+                vendor = Vendor.objects.get(vendor_code=vendor_id)
+                serializer.validated_data['vendor'] = vendor
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
