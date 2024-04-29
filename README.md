@@ -17,23 +17,27 @@ This project is a Django-based backend system for managing vendors, purchase ord
 
   ```shell
   git clone <repository_url>
+  ```
 
 2. Install dependencies:
 
   ```shell
   pip install -r requirements.txt
+  ```
 
 3. Apply database migrations:
 
   ```shell
   python manage.py makemigrations
   python manage.py migrate
+  ```
 
 
 4. Start the development server:
 
   ```shell
   python manage.py runserver
+  ```
 
 ## Usage
 1. python manage.py createsuperuser
@@ -41,31 +45,38 @@ This project is a Django-based backend system for managing vendors, purchase ord
 3. Use the Django admin interface to manage vendors, purchase orders, and historical performance metrics.
 4. Use the provided APIs to perform CRUD operations on vendors and purchase orders. The API endpoints and their functionalities are documented in the API documentation.
 
-## API documentation
+## API Documentation
+
 The following APIs are available in this project:
 
-# Vendors
-GET /api/vendors/: Retrieve a list of all vendors.
-GET /api/vendors/{id}/: Retrieve details of a specific vendor.
-POST /api/vendors/: Create a new vendor.
-PUT /api/vendors/{id}/: Update details of a specific vendor.
-DELETE /api/vendors/{id}/: Delete a specific vendor.
+### Vendors
 
-# Purchase Orders
-GET /api/purchase_orders/: Retrieve a list of all purchase orders.
-GET /api/purchase_orders/{id}/: Retrieve details of a specific purchase order.
-POST /api/purchase_orders/: Create a new purchase order.
-PUT /api/purchase_orders/{id}/: Update details of a specific purchase order.
-DELETE /api/purchase_orders/{id}/: Delete a specific purchase order.
+- `GET /api/vendors/`: Retrieve a list of all vendors.
+- `GET /api/vendors/{id}/`: Retrieve details of a specific vendor.
+- `POST /api/vendors/`: Create a new vendor.
+- `PUT /api/vendors/{id}/`: Update details of a specific vendor.
+- `DELETE /api/vendors/{id}/`: Delete a specific vendor.
+
+### Purchase Orders
+
+- `GET /api/purchase_orders/`: Retrieve a list of all purchase orders.
+- `GET /api/purchase_orders/{id}/`: Retrieve details of a specific purchase order.
+- `POST /api/purchase_orders/`: Create a new purchase order.
+- `PUT /api/purchase_orders/{id}/`: Update details of a specific purchase order.
+- `DELETE /api/purchase_orders/{id}/`: Delete a specific purchase order.
 
 ## Future Additions
-Integration
-Integrate with external systems for data synchronization and automation.
-Implement webhooks for real-time updates from external services.
-Authentication and Authorization
-Implement user authentication using JWT (JSON Web Tokens) for secure API access.
-Implement role-based access control to restrict API endpoints based on user roles.
-Ensure proper validation and verification of user permissions for sensitive operations.
+
+### Integration
+
+- Integrate with external systems for data synchronization and automation.
+- Implement webhooks for real-time updates from external services.
+
+### Authentication and Authorization
+
+- Implement user authentication using Tokens for secure API access.
+- Implement role-based access control to restrict API endpoints based on user roles.
+- Ensure proper validation and verification of user permissions for sensitive operations.
 
 ## Contributing
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
