@@ -11,7 +11,7 @@ def purchase_order_pre_save_signal(sender, instance, **kwargs):
         statusses = ['pending', 'cancelled', 'completed']
         old_instance = PurchaseOrder.objects.get(pk=instance.pk)
         instance._old_instance = old_instance
-
+        
         error_message = ""
         if old_instance.status == "cancelled":
             error_message = f"Cannot update Purchase Order once cancelled."

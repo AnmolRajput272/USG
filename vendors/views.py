@@ -7,8 +7,6 @@ from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
     
 class VendorModelView(ModelViewSet):
-    permission_classes = []
-    authentication_classes = []
     queryset = Vendor.objects.all()
     serializer_class = VendorSerializer
 
@@ -24,15 +22,8 @@ class VendorModelView(ModelViewSet):
         vendor = serializer.save()
         HistoricalPerformance.objects.create(vendor=vendor)
         return Response(serializer.data)
-            
-    # def perform_create(self, serializer):
-    #     vendor = serializer.save()
-    #     HistoricalPerformance.objects.create(vendor=vendor)
-    #     return Response(serializer.validated_data)
 
 class PurchaseOrderModelView(ModelViewSet):
-    permission_classes = []
-    authentication_classes = []
     queryset = PurchaseOrder.objects.all()
     serializer_class = PurchaseOrderModelSerializer
     
@@ -63,4 +54,7 @@ class PurchaseOrderModelView(ModelViewSet):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def destroy(self, request, *args, **kwargs):
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
